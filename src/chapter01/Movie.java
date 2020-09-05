@@ -27,10 +27,6 @@ public class Movie {
         this._title = _title;
     }
 
-    public int get_priceCode() {
-        return _priceCode.getPriceCode();
-    }
-
     public void set_priceCode(int priceCode) {
         switch (priceCode) {
             case Movie.REGULAR:
@@ -48,32 +44,12 @@ public class Movie {
     }
 
     public double getCharge(int daysRented) {
-        double thisAmount = 0;
-        switch (get_priceCode()) {
-            case Movie.REGULAR:
-                thisAmount += 2;
-                if (daysRented > 2) {
-                    thisAmount += (daysRented - 2) * 1.5;
-                }
-                break;
-            case Movie.CHILDRENS:
-                thisAmount += daysRented * 3;
-                break;
-            case Movie.NEW_RELEASE:
-                thisAmount += 1.5;
-                if (daysRented > 3) {
-                    thisAmount += (daysRented - 3) * 1.5;
-                }
-                break;
-            default:
-                break;
-        }
-        return thisAmount;
+        return _priceCode.getAmount(daysRented);
     }
 
     public int getFrequentRenterPoints(int daysRented) {
         // add bonus for a two day new release rental
-        if ((get_priceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
+        if ((_priceCode.getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
             return 2;
         }
         return 1;
