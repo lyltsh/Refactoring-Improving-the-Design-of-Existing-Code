@@ -29,8 +29,6 @@ public class Customer {
 
             Rental rental = (Rental) rentals.nextElement();
 
-            double thisAmount = rental.amountFor();
-
             // add grequent renter points
             frequentRenterPoints++;
             // add bonus for a two day new release rental
@@ -39,8 +37,8 @@ public class Customer {
             }
 
             // show fingures for this rental
-            result += "\t" + rental.getMovie().get_title() + "\t" + String.valueOf(thisAmount) + "\n";
-            totalAmount += thisAmount;
+            result += "\t" + rental.getMovie().get_title() + "\t" + String.valueOf(rental.amountFor()) + "\n";
+            totalAmount += rental.amountFor();
         }
 
         // add footer lines
