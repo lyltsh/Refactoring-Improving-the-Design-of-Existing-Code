@@ -17,4 +17,12 @@ public class RegularPrice extends Price {
         }
         return thisAmount;
     }
+
+    @Override
+    public int getFrequentRenterPoints(int daysRented) {
+        if (daysRented > 1) {
+            return 2;
+        }
+        return super.getFrequentRenterPoints(daysRented);
+    }
 }
