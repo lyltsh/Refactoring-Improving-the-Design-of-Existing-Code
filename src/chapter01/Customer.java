@@ -21,7 +21,7 @@ public class Customer {
 
     //生成详单的函数
     public String statement() {
-        double totalAmount = 0;
+
         int frequentRenterPoints = 0;
         Enumeration rentals = _rentals.elements();
         String result = "Rental Record for " + getName() + "\n";
@@ -33,13 +33,24 @@ public class Customer {
 
             // show fingures for this rental
             result += "\t" + rental.getMovie().get_title() + "\t" + String.valueOf(rental.amountFor()) + "\n";
-            totalAmount += rental.amountFor();
         }
 
         // add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
+        result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
         return result;
+    }
+
+    private double getTotalCharge() {
+        double totalAmount = 0;
+        Enumeration rentals = _rentals.elements();
+        while (rentals.hasMoreElements()) {
+
+            Rental rental = (Rental) rentals.nextElement();
+
+            totalAmount += rental.amountFor();
+        }
+        return totalAmount;
     }
 
 }
