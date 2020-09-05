@@ -1,5 +1,10 @@
 package chapter01;
 
+import chapter01.price.ChildrenPrice;
+import chapter01.price.NewReleasePrice;
+import chapter01.price.Price;
+import chapter01.price.RegularPrice;
+
 public class Movie {
 
     public static final int CHILDRENS = 2;
@@ -7,11 +12,11 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String _title;
-    private int _priceCode;
+    private Price _priceCode;
 
     public Movie(String title, int priceCode) {
         _title = title;
-        _priceCode = priceCode;
+        set_priceCode(priceCode);
     }
 
     public String get_title() {
@@ -23,11 +28,23 @@ public class Movie {
     }
 
     public int get_priceCode() {
-        return _priceCode;
+        return _priceCode.getPriceCode();
     }
 
-    public void set_priceCode(int _priceCode) {
-        this._priceCode = _priceCode;
+    public void set_priceCode(int priceCode) {
+        switch (priceCode) {
+            case Movie.REGULAR:
+                _priceCode = new RegularPrice();
+                break;
+            case Movie.CHILDRENS:
+                _priceCode = new ChildrenPrice();
+                break;
+            case Movie.NEW_RELEASE:
+                _priceCode = new NewReleasePrice();
+                break;
+            default:
+                throw new IllegalArgumentException("priceCode not available. priceCode: " + priceCode);
+        }
     }
 
     public double getCharge(int daysRented) {
