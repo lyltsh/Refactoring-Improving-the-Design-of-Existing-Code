@@ -29,12 +29,7 @@ public class Customer {
 
             Rental rental = (Rental) rentals.nextElement();
 
-            // add grequent renter points
-            frequentRenterPoints++;
-            // add bonus for a two day new release rental
-            if ((rental.getMovie().get_priceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
-                frequentRenterPoints++;
-            }
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             // show fingures for this rental
             result += "\t" + rental.getMovie().get_title() + "\t" + String.valueOf(rental.amountFor()) + "\n";
