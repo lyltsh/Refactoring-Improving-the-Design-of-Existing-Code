@@ -30,7 +30,7 @@ public class Customer {
             Rental rental = (Rental) rentals.nextElement();
 
             // show fingures for this rental
-            result += "\t" + rental.getMovie().get_title() + "\t" + String.valueOf(rental.amountFor()) + "\n";
+            result += "\t" + rental.getMovie().get_title() + "\t" + String.valueOf(rental.getCharge()) + "\n";
         }
 
         // add footer lines
@@ -46,7 +46,7 @@ public class Customer {
 
             Rental rental = (Rental) rentals.nextElement();
 
-            totalAmount += rental.amountFor();
+            totalAmount += rental.getCharge();
         }
         return totalAmount;
     }
