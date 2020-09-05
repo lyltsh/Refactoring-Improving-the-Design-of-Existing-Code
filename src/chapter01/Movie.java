@@ -30,7 +30,7 @@ public class Movie {
         this._priceCode = _priceCode;
     }
 
-    public double amountFor(int daysRented) {
+    public double getCharge(int daysRented) {
         double thisAmount = 0;
         switch (get_priceCode()) {
             case Movie.REGULAR:
