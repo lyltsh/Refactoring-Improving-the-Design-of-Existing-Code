@@ -22,14 +22,12 @@ public class Customer {
     //生成详单的函数
     public String statement() {
 
-        int frequentRenterPoints = 0;
         Enumeration rentals = _rentals.elements();
         String result = "Rental Record for " + getName() + "\n";
+
         while (rentals.hasMoreElements()) {
 
             Rental rental = (Rental) rentals.nextElement();
-
-            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             // show fingures for this rental
             result += "\t" + rental.getMovie().get_title() + "\t" + String.valueOf(rental.amountFor()) + "\n";
@@ -37,7 +35,7 @@ public class Customer {
 
         // add footer lines
         result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points";
         return result;
     }
 
@@ -53,4 +51,16 @@ public class Customer {
         return totalAmount;
     }
 
+    public int getTotalFrequentRenterPoints() {
+        Enumeration rentals = _rentals.elements();
+        int frequentRenterPoints = 0;
+        while (rentals.hasMoreElements()) {
+
+            Rental rental = (Rental) rentals.nextElement();
+
+            frequentRenterPoints += rental.getFrequentRenterPoints();
+
+        }
+        return frequentRenterPoints;
+    }
 }
